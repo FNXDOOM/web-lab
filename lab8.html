@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Registration</title>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 20px;
+                max-width: 300px;
+                margin: auto;
+            }
+            input {
+                width: 100%;
+                padding: 8px;
+                margin: 5px 0;
+                border: 1px solid black;
+                box-sizing: border-box;
+            }
+            button {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #45a049;
+            }
+            .error {
+                color: red;
+                font-size: 14px;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Registration Form</h2>
+        <form onsubmit="return validate(event)">
+            <input type="text" id="name" placeholder="Enter the fullname" required>
+            <input type="email" id="email" placeholder="example@gmail.com" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="confirmpassword" placeholder="Confirm Password" required>
+            <input type="tel" id="phone" placeholder="Phone" required>
+            <button type="submit">Register</button>
+            <div id="error" class="error"></div>
+        </form>
+        <script>
+            function validate(e) {
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                const confirmpassword = document.getElementById('confirmpassword').value;
+                const phone = document.getElementById('phone').value.trim();
+                const error = document.getElementById('error');
+                
+                function showError(msg) {
+                    error.textContent = msg;
+                    e.preventDefault();
+                    return false;
+                }
+                
+                if (!name) return showError('Name required');
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showError('Invalid email address');
+                if (password.length < 6) return showError('Password must be 6 characters long');
+                if (password !== confirmpassword) return showError("Passwords don't match");
+                if (!/^\d{10}$/.test(phone)) return showError('Enter 10 digit phone number');
+                
+                error.textContent = '';
+                alert('Registration successful!');
+                return false;
+            }
+        </script>
+    </body>
+</html>

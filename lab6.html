@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Animation</title>
+    <style>
+        #animated-text {
+            transition: all 0.1s linear;
+        }
+    </style>
+</head>
+<body>
+    <div id="text-container">
+        <span id="animated-text">TEXT-GROWING</span>
+    </div>
+
+    <script>
+        const textElement = document.getElementById("animated-text");
+        let fontsize = 5;
+        let growing = true;
+
+        function animatetxt() {
+            if (growing) {
+                fontsize++;
+                textElement.style.color = "red";
+                textElement.textContent = "Text-Growing";
+                textElement.style.fontSize = fontsize + "pt";
+                if (fontsize >= 50) {
+                    growing = false;
+                }
+            } else {
+                fontsize--;
+                textElement.style.color = "blue";
+                textElement.textContent = "Text-Shrinking";
+                textElement.style.fontSize = fontsize + "pt";
+                if (fontsize <= 5) {
+                    growing = true;
+                }
+            }
+            setTimeout(animatetxt, 100);
+        }
+
+        animatetxt(); // start animation
+    </script>
+</body>
+</html>
